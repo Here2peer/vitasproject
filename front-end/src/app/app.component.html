@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+</head>
+<body>
+<div>
+
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="stopId" placeholder="Stop ID"/>
+    </mat-form-field>
+
+    <button mat-button type="button" (click)="getStop(stopId)">Get stop</button>
+    <button mat-button type="button" (click)="getStops()">Get all stops</button>
+
+    <app-table *ngIf="stops" [displayedColumns]="stopDisplayedColumns" [tableHeaders]="stopTableHeaders" [objectArray]="stops"></app-table>
+
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="rideId" placeholder="Ride ID">
+    </mat-form-field>
+
+    <button mat-button type="button" (click)="getRide(rideId)">Get ride</button>
+    <button mat-button type="button" (click)="getRides()">Get all rides</button>
+
+    <app-table *ngIf="rides" [displayedColumns]="rideDisplayedColumns" [tableHeaders]="rideTableHeaders" [objectArray]="rides"></app-table>
+
+    <mat-form-field>
+        <input matInput type="number" [(ngModel)]="orderId" placeholder="Order ID"/>
+    </mat-form-field>
+    <button mat-button type="button" (click)="getOrder(orderId)">Get order</button>
+    <button mat-button type="button" (click)="getOrders()">Get all orders</button>
+
+  <app-table *ngIf="orders" [displayedColumns]="orderDisplayedColumns" [tableHeaders]="orderTableHeaders" [objectArray]="orders"></app-table>
+
+</div>
+
+</body>
+<footer></footer>
+</html>

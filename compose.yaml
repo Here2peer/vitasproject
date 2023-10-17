@@ -1,0 +1,32 @@
+services:
+  delivery-back-end:
+    container_name: delivery-back-end
+    build: .
+    image: vitasproject
+    ports:
+      - "8080:8080"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+  delivery-db:
+    image: postgres:latest
+    container_name: delivery-db
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    ports:
+      - '5432:5432'
+    volumes:
+      - delivery-db:/var/lib/postgresql/data
+  delivery-front-end:
+    container_name: delivery-front-end
+    build: spring-frontend/.
+    volumes:
+        - ./spring-frontend:/app
+    ports:
+        - "4200:4200"
+    command: >
+      bash -c "ng serve --host 0.0.0.0 --port 4200"
+
+volumes:
+  delivery-db:
+    driver: local

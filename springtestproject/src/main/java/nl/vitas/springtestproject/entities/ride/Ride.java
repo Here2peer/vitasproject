@@ -34,6 +34,11 @@ public class Ride {
         this.timeStamp = timeStamp;
         this.description = description;
     }
+    public Ride(Integer rideNumber, Timestamp timeStamp, String description, Set<Stop> stops) {
+        this.rideNumber = rideNumber;
+        this.timeStamp = timeStamp;
+        this.description = description;
+    }
 
     public Ride() {
 
@@ -72,7 +77,7 @@ public class Ride {
     }
 
     public Set<Stop> getStops() {
-        return stops;
+        return new HashSet<>(this.stops);
     }
 
     public void setStops(Set<Stop> stops) {

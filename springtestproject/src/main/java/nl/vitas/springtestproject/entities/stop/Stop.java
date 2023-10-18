@@ -69,7 +69,7 @@ public class Stop {
 
 
     public Ride getRide() {
-        return ride;
+        return new Ride(ride.getRideNumber(), ride.getTimeStamp(), ride.getDescription(), ride.getStops());
     }
 
     public void setRide(Ride rides) {
@@ -77,7 +77,7 @@ public class Stop {
     }
 
     public Order getOrder() {
-        return order;
+        return new Order(order.getOrderNumber(), order.getDescription());
     }
 
     public void setOrder(Order order) {

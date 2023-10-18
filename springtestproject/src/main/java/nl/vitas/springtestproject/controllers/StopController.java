@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: 18/10/2023  Write an api to finish stops
+
 @RestController
 @RequestMapping("/api/v1")
 public class StopController {

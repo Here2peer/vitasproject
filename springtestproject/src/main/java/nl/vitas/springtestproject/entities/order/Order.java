@@ -60,7 +60,7 @@ public class Order {
     }
 
     public Set<Stop> getStops() {
-        return stops;
+        return new HashSet<>(stops);
     }
 
     public void setStops(Set<Stop> stops) {

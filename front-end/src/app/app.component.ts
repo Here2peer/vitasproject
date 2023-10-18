@@ -43,48 +43,69 @@ export class AppComponent implements AfterViewInit{
   public getRides() {
     this.rides = [];
     this.ridesService.getRides().subscribe(rides => {
-      this.rideDisplayedColumns = Object.keys(rides[0]);
-      this.rides = rides;
+      if (rides.length > 0) {
+        this.rideDisplayedColumns = Object.keys(rides[0]);
+        this.rides = rides;
+      }
     });
   }
 
   public getRide(id: number) {
+    if (id == null) {
+      return;
+    }
     this.rides = [];
     this.ridesService.getRide(id).subscribe(ride => {
-      this.rideDisplayedColumns = Object.keys(ride);
-      this.rides = [ride];
+      if (ride != null) {
+        this.rideDisplayedColumns = Object.keys(ride);
+        this.rides = [ride];
+      }
     });
   }
 
   public getStops() {
     this.stops = [];
     this.stopsService.getStops().subscribe(stops => {
-      this.stopDisplayedColumns = Object.keys(stops[0]);
-      this.stops = stops;
+      if (stops.length > 0) {
+        this.stopDisplayedColumns = Object.keys(stops[0]);
+        this.stops = stops;
+      }
     });
   }
 
   public getStop(id: number) {
+    if (id == null) {
+        return;
+    }
     this.stops = [];
     this.stopsService.getStop(id).subscribe(stop => {
-      this.stopDisplayedColumns = Object.keys(stop);
-      this.stops = [stop];
+      if (stop != null) {
+        this.stopDisplayedColumns = Object.keys(stop);
+        this.stops = [stop];
+      }
     });
   }
 
   public getOrders() {
     this.orders = [];
     this.orderService.getOrders().subscribe(orders => {
-      this.orderDisplayedColumns = Object.keys(orders[0]);
-      this.orders = orders;
+      if (orders.length > 0) {
+        this.orderDisplayedColumns = Object.keys(orders[0]);
+        this.orders = orders;
+      }
     });
   }
 
   public getOrder(id: number) {
+    if (id == null) {
+        return;
+    }
     this.orders = [];
     this.orderService.getOrder(id).subscribe(order => {
-      this.orderDisplayedColumns = Object.keys(order);
-      this.orders = [order];
+      if (order != null) {
+        this.orderDisplayedColumns = Object.keys(order);
+        this.orders = [order];
+      }
     });
   }
 }

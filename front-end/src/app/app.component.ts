@@ -34,9 +34,6 @@ export class AppComponent implements AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.getStops();
-    this.getRides();
-    this.getOrders();
   }
 
 
@@ -86,15 +83,7 @@ export class AppComponent implements AfterViewInit{
     });
   }
 
-  public getOrders() {
-    this.orders = [];
-    this.orderService.getOrders().subscribe(orders => {
-      if (orders.length > 0) {
-        this.orderDisplayedColumns = Object.keys(orders[0]);
-        this.orders = orders;
-      }
-    });
-  }
+
 
   public getOrder(id: number) {
     if (id == null) {

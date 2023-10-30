@@ -1,5 +1,9 @@
 package nl.vitas.springtestproject.entities.ride;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 import nl.vitas.springtestproject.entities.stop.Stop;
@@ -10,8 +14,8 @@ import java.util.Set;
 
 
 @Entity
-@Data
 @Table(name = "rides")
+
 public class Ride {
 
     @Id
@@ -24,9 +28,11 @@ public class Ride {
 
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ride", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "ride", cascade = CascadeType.DETACH)
     private Set<Stop> stops = new HashSet<>();
 
+
+    @JsonIgnore
     private boolean isFinished = false;
 
     public Ride(Integer rideNumber, Timestamp timeStamp, String description) {
@@ -87,7 +93,7 @@ public class Ride {
     public boolean isFinished() {
         if (!isFinished && !stops.isEmpty()) {
             for (Stop stop : stops) {
-                if (!stop.HasBeenVisited()) {
+                if (!stop.getHasBeenVisited()) {
                     return false;
                 }
             }

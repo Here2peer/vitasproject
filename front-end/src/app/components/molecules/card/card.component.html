@@ -1,0 +1,16 @@
+
+<div class="{{twClasses}}">
+
+    <app-card-header *ngIf="cardType == 'Classic'" [cardTitle]="cardTitle">
+        <ng-content select="[cardHeader]"/>
+    </app-card-header>
+
+    <app-card-header *ngIf="cardType == 'ReturnClassic'" [returnButton]="true" [cardTitle]="cardTitle">
+        <ng-content select="[cardHeader]"/>
+    </app-card-header>
+
+    <app-card-body>
+        <ng-content select="[cardBody]"/>
+    </app-card-body>
+
+</div>

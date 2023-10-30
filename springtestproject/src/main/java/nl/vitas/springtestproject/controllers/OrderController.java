@@ -1,5 +1,6 @@
 package nl.vitas.springtestproject.controllers;
 
+import com.azure.core.annotation.Get;
 import nl.vitas.springtestproject.entities.order.Order;
 import nl.vitas.springtestproject.entities.order.data.OrderRepository;
 import nl.vitas.springtestproject.entities.stop.Stop;
@@ -35,6 +36,11 @@ public class OrderController {
                 .orElseThrow(() -> new RuntimeException("Order not found for id :: " + id));
 
         return ResponseEntity.ok(order);
+    }
+
+    @GetMapping("/orders/amount")
+    public ResponseEntity<Long> getAmountOfOrders() {
+        return ResponseEntity.ok(orderRepository.count());
     }
 
     @PostMapping("/order")

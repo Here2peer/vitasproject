@@ -1,0 +1,18 @@
+<div class="card-header flex flex-row justify-between">
+
+    <app-link *ngIf="returnButton" link="..">
+    <h1 class="h6">
+        <i class="fad fa-arrow-left fa-lg"></i>
+        {{cardTitle}}
+    </h1>
+    </app-link>
+
+    <h1 class="h6" *ngIf="!returnButton">
+        {{cardTitle}}
+    </h1>
+
+    <div class="flex flex-row justify-center items-center">
+        <ng-content></ng-content>
+    </div>
+
+</div>

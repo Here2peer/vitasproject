@@ -1,0 +1,41 @@
+<app-wrapper>
+    <app-card cardType="ReturnClassic" cardTitle="Stop detail">
+
+        <div cardHeader class="grid grid-cols-4 gap-6 lg:grid-cols-1">
+        </div>
+
+        <div *ngIf="object" cardBody class="container">
+            <div [hidden]="submitted">
+                <form class="max-w-md" (ngSubmit)="onSubmit()" #stopForm="ngForm">
+                    <div class="grid grid-rows-1">
+                        <input type="hidden" [(ngModel)]="object.id" name="stopId">
+                        <mat-form-field>
+                            <mat-label>Stop number</mat-label>
+                            <input matInput type="number" [(ngModel)]="object.stopNumber" name="stopNumber" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Postcode</mat-label>
+                            <input matInput type="string" [(ngModel)]="object.postcode" name="stopPostcode" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>House number</mat-label>
+                            <input matInput type="string" [(ngModel)]="object.houseNumber" name="stopHouseNumber" required>
+                        </mat-form-field>
+                            <mat-checkbox
+                                    [(ngModel)]="object.hasBeenVisited"
+                                    name="hasBeenVisited">
+                                Has been visited?
+                            </mat-checkbox>
+
+                        <div class="grid grid-cols-3 gap-2">
+                            <button mat-raised-button type="submit" color="primary">Submit</button>
+                            <button (click)=stopForm.reset(originalObject) type="reset" mat-raised-button color="accent">Reset</button>
+                            <button (click)="onDelete()" mat-raised-button color="warn">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </app-card>
+</app-wrapper>

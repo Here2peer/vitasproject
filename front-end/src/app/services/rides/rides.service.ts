@@ -2,6 +2,7 @@ import {Injectable, NgModule} from '@angular/core';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Ride} from "../../models/ride";
 import {map} from "rxjs";
+import {RideDto} from "../../models/ride-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,36 @@ export class RidesService {
       map(data => new Ride().deserialize(data))
     );
   }
+
+    public deleteRide(id: number) {
+    return this.httpService.delete<Ride>( 'http://localhost:8080/api/v1/ride/' + id).pipe(
+      map(data => new Ride().deserialize(data))
+    );
+    }
+
+    public createRide(ride: Ride) {
+    const rideDTO = new RideDto(
+        ride.id,
+        ride.rideNumber,
+        ride.description,
+    );
+
+    return this.httpService.post<RideDto>( 'http://localhost:8080/api/v1/ride', rideDTO);
+    }
+
+    public updateRide(ride: Ride) {
+    const rideDTO = new RideDto(
+        ride.id,
+        ride.rideNumber,
+        ride.description,
+    );
+    return this.httpService.put<RideDto>( 'http://localhost:8080/api/v1/ride/' + ride.id, rideDTO);
+    }
+
+  public getRidesAmount()  {
+    return this.httpService.get<number>( 'http://localhost:8080/api/v1/rides/amount').pipe(
+        map(data => data)
+    );
+  }
+
 }

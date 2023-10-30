@@ -1,0 +1,33 @@
+<app-wrapper>
+    <app-card cardType="ReturnClassic" cardTitle="Ride detail">
+
+        <div cardHeader class="grid grid-cols-4 gap-6 lg:grid-cols-1">
+        </div>
+
+        <div *ngIf="object" cardBody class="container">
+            <div>
+                <form class="max-w-md" (ngSubmit)="onSubmit()" #stopForm="ngForm">
+                    <div class="grid grid-rows-1">
+                        <input type="hidden" [(ngModel)]="object.id" name="rideId">
+                        <input type="hidden" [(ngModel)]="object.finished" name="finished">
+                        <mat-form-field>
+                            <mat-label>Ride number</mat-label>
+                            <input matInput type="number" [(ngModel)]="object.rideNumber" name="rideNumber" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <input matInput type="string" [(ngModel)]="object.description" name="description" required>
+                        </mat-form-field>
+
+                        <div class="grid grid-cols-3 gap-2">
+                            <button mat-raised-button type="submit" color="primary">Submit</button>
+                            <button (click)=stopForm.reset(originalObject) type="reset" mat-raised-button color="accent">Reset</button>
+                            <button (click)="onDelete()" mat-raised-button color="warn">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </app-card>
+</app-wrapper>

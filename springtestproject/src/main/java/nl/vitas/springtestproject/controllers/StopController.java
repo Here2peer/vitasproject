@@ -24,11 +24,7 @@ public class StopController {
 
     @GetMapping("/stops")
     public List<Stop> getAllStops() {
-        List<Stop> stops = new ArrayList<>();
-        for (Stop stop : stopRepository.findAll()) {
-            stops.add(stop);
-        }
-        return stops;
+        return new ArrayList<>(stopRepository.findAll());
     }
 
     @GetMapping("/stop/{id}")
@@ -37,6 +33,11 @@ public class StopController {
                 .orElseThrow(() -> new RuntimeException("Stop not found for id :: " + id));
 
         return ResponseEntity.ok(stop);
+    }
+
+    @GetMapping("/stops/amount")
+    public ResponseEntity<Long> getAmountOfStops() {
+        return ResponseEntity.ok(stopRepository.count());
     }
 
     @PostMapping("/stop")
@@ -57,6 +58,9 @@ public class StopController {
         _stop.setStopNumber(stop.getStopNumber());
         _stop.setPostcode(stop.getPostcode());
         _stop.setHouseNumber(stop.getHouseNumber());
+        if (stop.getHasBeenVisited()) {
+            _stop.setHasBeenVisited();
+        }
         return ResponseEntity.ok(stopRepository.save(_stop));
     }
 
@@ -70,5 +74,14 @@ public class StopController {
         _stop.setRide(_ride);
         _ride.addStop(_stop);
         return ResponseEntity.ok(stopRepository.save(_stop));
+    }
+
+    @DeleteMapping("/stop/{id}")
+    public ResponseEntity<Boolean> deleteStop(@PathVariable Long id) {
+        Stop _stop = stopRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Stop not found for id :: " + id));
+
+        stopRepository.delete(_stop);
+        return ResponseEntity.ok(true);
     }
 }

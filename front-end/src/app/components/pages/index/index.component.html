@@ -1,0 +1,13 @@
+<app-wrapper>
+
+    <div class="grid grid-cols-3 gap-6 xl:grid-cols-1">
+        <app-link link="rides"><app-report-card icon="fad fa-car fa-lg" [objectCount]="ridesAmount" description=" Rides amount: "/></app-link>
+        <app-link link="stops"><app-report-card icon="fad fa-warehouse fa-lg" [objectCount]="stopsAmount" description=" Stops amount: "/></app-link>
+        <app-link link="orders"><app-report-card icon="fad fa-dolly fa-lg" [objectCount]="ordersAmount" description=" Orders amount: "/></app-link>
+    </div>
+
+    <div class="grid">
+        <app-ride-info [rides]="rides"></app-ride-info>
+    </div>
+
+</app-wrapper>

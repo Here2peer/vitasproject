@@ -45,7 +45,7 @@ class RideTests {
         stop1 = new Stop(1, "9797LL", "10d");
         stop2 = new Stop(2, "9797LL", "10d");
 
-        ride = rideRepository.save(ride);
+        ride = rideRepository.saveAndFlush(ride);
         stop1 = stopRepository.save(stop1);
         stop2 = stopRepository.save(stop2);
     }

@@ -1,5 +1,9 @@
 package nl.vitas.springtestproject.entities.stop;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import nl.vitas.springtestproject.entities.order.Order;
 import nl.vitas.springtestproject.entities.ride.Ride;
@@ -7,7 +11,6 @@ import nl.vitas.springtestproject.entities.ride.Ride;
 
 @Entity
 @Table(name = "stops")
-//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ride"})
 public class Stop {
 
     @Id
@@ -22,11 +25,13 @@ public class Stop {
 
     private Boolean hasBeenVisited = false;
 
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.DETACH)
     private Ride ride;
 
-    @OneToOne
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.DETACH)
     private Order order;
 
     public Stop(Integer stopNumber, String postcode, String houseNumber) {
@@ -42,6 +47,7 @@ public class Stop {
     public Long getId() {
         return id;
     }
+
 
     public Integer getStopNumber() {
         return stopNumber;
@@ -84,7 +90,7 @@ public class Stop {
         this.order = order;
     }
 
-    public Boolean HasBeenVisited() {
+    public Boolean getHasBeenVisited() {
         return hasBeenVisited;
     }
 

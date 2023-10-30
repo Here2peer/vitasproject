@@ -1,6 +1,9 @@
 package nl.vitas.springtestproject.entities.order;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import nl.vitas.springtestproject.entities.stop.Stop;
 
@@ -18,10 +21,9 @@ public class Order {
     private String orderNumber;
 
     private String description;
-
-
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.DETACH)
     private Set<Stop> stops = new HashSet<>();
+
 
     public Order(String orderNumber, String description) {
         this.orderNumber = orderNumber;
@@ -70,4 +72,5 @@ public class Order {
     public void addStop(Stop stop) {
         this.stops.add(stop);
     }
+
 }

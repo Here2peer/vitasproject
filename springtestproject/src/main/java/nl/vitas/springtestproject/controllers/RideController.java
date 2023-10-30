@@ -4,6 +4,7 @@ import nl.vitas.springtestproject.entities.ride.Ride;
 import nl.vitas.springtestproject.entities.ride.data.RideRepository;
 import nl.vitas.springtestproject.entities.stop.Stop;
 import nl.vitas.springtestproject.entities.stop.data.StopRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,12 +42,34 @@ public class RideController {
         return new ResponseEntity<>(ride, HttpStatus.OK);
     }
 
+    @GetMapping("/rides/amount")
+    public ResponseEntity<Long> getAmountOfRides() {
+        return new ResponseEntity<>(rideRepository.count(), HttpStatus.OK);
+    }
+
     @PostMapping("/ride")
     public ResponseEntity<Ride> createRide(@RequestBody Ride ride) {
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        ride.setTimeStamp(timestamp);
+
+        ModelMapper modelMapper = new ModelMapper();
+        Ride _ride = modelMapper.map(ride, Ride.class);
+
+        if (_ride.getTimeStamp() == null) {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            _ride.setTimeStamp(timestamp);
+        }
+
         try {
-            Ride _ride = rideRepository.save(new Ride(ride.getRideNumber(), ride.getTimeStamp(), ride.getDescription()));
+            if (!ride.getStops().isEmpty()) {
+                for (Stop stop : ride.getStops()) {
+                    _ride.addStop(stop);
+                    stop.setRide(_ride);
+                    if (stop.getOrder() != null) {
+                        stop.setOrder(stop.getOrder());
+                    }
+                    stopRepository.save(stop);
+                }
+            }
+            rideRepository.save(_ride);
             return ResponseEntity.ok(_ride);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

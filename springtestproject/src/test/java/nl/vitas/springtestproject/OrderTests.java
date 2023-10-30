@@ -17,7 +17,7 @@ public class OrderTests {
     @Test
     public void OrdersArePersisted() {
         Order order = new Order("A1", "A description");
-        order = orderRepository.save(order);
+        order = orderRepository.saveAndFlush(order);
         assertTrue(orderRepository.findById(order.getId()).isPresent());
     }
 }

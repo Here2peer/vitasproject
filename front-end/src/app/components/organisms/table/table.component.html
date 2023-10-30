@@ -1,0 +1,18 @@
+
+
+
+<table *ngIf="objectArray.length > 0" mat-table [dataSource]="objectArray" class="text-sm">
+  <ng-container *ngFor="let item of objectArray[0] | keyvalue: unsorted; let i = index" matColumnDef="{{item.key}}">
+    <th mat-header-cell *matHeaderCellDef>{{tableHeaders[i]}}</th>
+
+      <td mat-cell *matCellDef="let element">
+        <app-link [link]="['./', element.id]">
+        <div ngDefaultControl [(ngModel)]="element[displayedColumns[i]]"> {{element[displayedColumns[i]]}} </div>
+        </app-link>
+      </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

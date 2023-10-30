@@ -33,7 +33,7 @@ public class Ride {
 
 
     @JsonIgnore
-    private boolean isFinished = false;
+    private boolean isFinished = isFinished();
 
     public Ride(Integer rideNumber, Timestamp timeStamp, String description) {
         this.rideNumber = rideNumber;

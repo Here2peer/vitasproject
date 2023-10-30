@@ -1,6 +1,6 @@
 <div class="card-header flex flex-row justify-between">
 
-    <app-link *ngIf="returnButton" link="..">
+    <app-link *ngIf="returnButton" [link]=overrideLink>
     <h1 class="h6">
         <i class="fad fa-arrow-left fa-lg"></i>
         {{cardTitle}}

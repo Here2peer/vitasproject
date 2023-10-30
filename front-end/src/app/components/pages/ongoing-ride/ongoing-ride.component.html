@@ -1,10 +1,38 @@
 <app-wrapper>
-    <app-card cardType="Classic" cardTitle="Ride creation">
+    <app-card *ngIf="morphedRides" overrideLink="../../" cardType="ReturnClassic" cardTitle="Ride creation">
 
         <div cardHeader class="grid grid-cols-4 gap-6 lg:grid-cols-1">
         </div>
 
         <div cardBody class="container">
+            <div class="grid grid-rows gap 6">
+            <mat-form-field>
+                <mat-label>Select ride</mat-label>
+                <mat-select [(value)]="selectedRide">
+                    <mat-option *ngFor="let ride of morphedRides" [value]="ride.id">
+                        Id: {{ride.id}} - {{ride.rideNumber}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-label *ngIf="selectedRide">Select stops</mat-label>
+            <mat-selection-list *ngIf="selectedRide" #stopsList [multiple]="false" [(ngModel)]="selectedStops">
+                <app-link *ngIf="morphedStops.length < 1"  link="../../stops/create"><button mat-raised-button >No stops available, create a new stop</button></app-link>
+                <mat-list-option *ngFor="let stop of morphedStops" [value]="stop.id" >
+                  Stop with Id {{stop.id}} and stop number {{stop.stopNumber}}
+                </mat-list-option>
+            </mat-selection-list>
+
+            <mat-label *ngIf="selectedStops">Select order</mat-label>
+            <mat-selection-list *ngIf="selectedStops" #ordersList [multiple]="false" [ngModel]="selectedOrders">
+                <mat-list-option *ngFor="let order of orders" [value]="order.id">
+                    Order with Id {{order.id}} and stop number {{order.orderNumber}}
+                </mat-list-option>
+            </mat-selection-list>
+
+            <button mat-raised-button color="primary" (click)="linkRide()">Create ride</button>
+
+            </div>
 
         </div>
 

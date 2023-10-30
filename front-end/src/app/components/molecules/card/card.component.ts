@@ -13,6 +13,9 @@ export class CardComponent {
   @Input()
   cardType: 'Classic' | 'Report' | 'ReturnClassic' = 'Classic';
 
+  @Input()
+  overrideLink: string;
+
   twClasses: string
 
   returnButton: boolean = false;

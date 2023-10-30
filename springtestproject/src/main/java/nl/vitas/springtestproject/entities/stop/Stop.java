@@ -30,7 +30,6 @@ public class Stop {
     private Ride ride;
 
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.DETACH)
     private Order order;
 

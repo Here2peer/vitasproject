@@ -5,7 +5,7 @@
         <ng-content select="[cardHeader]"/>
     </app-card-header>
 
-    <app-card-header *ngIf="cardType == 'ReturnClassic'" [returnButton]="true" [cardTitle]="cardTitle">
+    <app-card-header *ngIf="cardType == 'ReturnClassic'" [overrideLink]=overrideLink [returnButton]="true" [cardTitle]="cardTitle">
         <ng-content select="[cardHeader]"/>
     </app-card-header>
 

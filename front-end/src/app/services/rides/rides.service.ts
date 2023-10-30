@@ -61,4 +61,9 @@ export class RidesService {
     );
   }
 
+  public linkRide(rideId: number, stopId: number, orderId) {
+    this.httpService.put<RideDto>( 'http://localhost:8080/api/v1/ride/' + rideId + '/stop/' + stopId, null);
+    return this.httpService.put('http://localhost:8080/api/v1/order/' + orderId + '/order/' + stopId, null);
+  }
+
 }

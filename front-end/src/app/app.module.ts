@@ -41,6 +41,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { RideDetailsComponent } from './components/pages/ride-details/ride-details.component';
 import { OrderDetailsComponent } from './components/pages/order-details/order-details.component';
 import { OngoingRideComponent } from './components/pages/ongoing-ride/ongoing-ride.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatListModule} from "@angular/material/list";
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +72,7 @@ import { OngoingRideComponent } from './components/pages/ongoing-ride/ongoing-ri
     StopDetailsComponent,
     RideDetailsComponent,
     OrderDetailsComponent,
-    OngoingRideComponent
+    OngoingRideComponent,
   ],
     imports: [
         BrowserModule,
@@ -84,7 +86,9 @@ import { OngoingRideComponent } from './components/pages/ongoing-ride/ongoing-ri
         MatButtonModule,
         MatRadioModule,
         MatCheckboxModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        MatSelectModule,
+        MatListModule
     ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

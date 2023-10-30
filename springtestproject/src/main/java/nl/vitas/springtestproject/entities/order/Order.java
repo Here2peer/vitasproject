@@ -21,6 +21,7 @@ public class Order {
     private String orderNumber;
 
     private String description;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.DETACH)
     private Set<Stop> stops = new HashSet<>();
 
